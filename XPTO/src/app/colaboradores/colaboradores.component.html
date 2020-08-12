@@ -1,0 +1,97 @@
+<div id="ColaboradoresModal" class="modal hide fade in">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center">
+          Colaboradores <i class="far fa-grin-stars"></i>
+          <p>
+            Vamos adicionar ou editar o cadastro de um colaborador(a) em uma de
+            nossas equipes? Digite as informações dela(e) abaixo!
+          </p>
+        </h5>
+
+        <span aria-hidden="true">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="colaborateGroup" method="post" class="text-center">
+          <div class="form-group">
+            <label>Nome:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nome"
+              [value]="this.Colaboradores?.nome ? this.Colaboradores?.nome : ''"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Telefone:</label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              formControlName="telefone"
+              mask="(00) 0000-00000"
+              class="form-control"
+              [value]="
+                this.Colaboradores?.telefone ? this.Colaboradores?.telefone : ''
+              "
+            />
+          </div>
+          <div class="form-group">
+            <label>Data de Nascimento:</label>
+            <input
+              type="date"
+              id="birthday"
+              formControlName="dataNascimento"
+              class="form-control"
+              [value]="
+                this.Colaboradores?.dataNascimento
+                  ? (this.Colaboradores?.dataNascimento | date: 'yyyy-MM-dd')
+                  : ''
+              "
+            />
+          </div>
+          <div class="form-group">
+            <label>Genero:</label>
+            <select
+              formControlName="genero"
+              class="form-control"
+              [value]="
+                this.Colaboradores?.genero ? this.Colaboradores?.genero : ''
+              "
+            >
+              <option value="Feminino">Feminino</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Outro">Outro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Endereço:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="endereco"
+              [value]="
+                this.Colaboradores?.endereco ? this.Colaboradores?.endereco : ''
+              "
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="close()"
+        >
+          Fechar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="Save()">
+          Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

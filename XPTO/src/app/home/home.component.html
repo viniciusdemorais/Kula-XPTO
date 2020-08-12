@@ -1,0 +1,119 @@
+<header>
+  <div [@Appeared]="stateHeader">
+    <h1 class="site-title">Bem vindo a plataforma Bord da empresa XPTO!</h1>
+    <h2 class="site-subtitle">
+      Alta eficiencia em gerenciamento de colaboradores e equipes
+    </h2>
+  </div>
+</header>
+
+<section class="equipes" [@Row]="stateEquip">
+  <h2 class="equip">Equipes</h2>
+  <button
+    class="addcat btn"
+    data-toggle="modal"
+    data-target="#EquipeModal"
+    [routerLink]="['/equipes']"
+  >
+    <i class="fas fa-plus-circle"></i>
+  </button>
+
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let Equip of equipe" class="rowHome">
+        <div class="card-header">
+          <p class="title">
+            <i class="fas fa-users"></i> {{ Equip.nome }}
+            <button
+              class="btn"
+              data-toggle="modal"
+              data-target="#EquipeModal"
+              [routerLink]="['/equipes', Equip.idEquipe]"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            <button
+              class="btn"
+              data-toggle="modal"
+              data-target="#excluir"
+              (click)="setDelete(Equip.idEquipe, 'E')"
+            >
+              <i class="fas fa-user-times"></i>
+            </button>
+          </p>
+        </div>
+
+        <ul
+          class="list-group list-group-flush"
+          *ngFor="let Colabore of colaboradores"
+        >
+          <li class="list-group-item" *ngIf="Colabore.equipe == Equip.idEquipe">
+            <p class="itemtable">
+              <i class="far fa-user"></i>
+              {{ Colabore.nome }}
+              <button
+                class="btn"
+                data-toggle="modal"
+                data-target="#ColaboradoresModal"
+                [routerLink]="[
+                  '/colaboradores',
+                  Colabore.idColaborador,
+                  Equip.idEquipe
+                ]"
+              >
+                <i class="far fa-edit"></i>
+              </button>
+              <button
+                class="btn"
+                data-toggle="modal"
+                data-target="#excluir"
+                (click)="setDelete(Colabore.idColaborador, 'C')"
+              >
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </p>
+          </li>
+        </ul>
+
+        <div class="text-center list-group-item">
+          <button
+            class="btn"
+            data-toggle="modal"
+            data-target="#ColaboradoresModal"
+            [routerLink]="['/colaboradores', Equip.idEquipe]"
+          >
+            <i class="fas fa-user-plus"></i>
+          </button>
+        </div>
+        <div class="card-footer bg-transparent">
+          <p>
+            <i class="fas fa-user-tie"></i> Gestor(a): {{ Equip.nomeGestor }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" tabindex="-1" role="dialog" id="excluir">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Você deseja mesmo excluir?</h5>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="Excluir()"
+        >
+          Excluir
+        </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

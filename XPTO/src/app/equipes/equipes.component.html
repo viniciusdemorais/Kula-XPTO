@@ -1,0 +1,56 @@
+<div
+  id="EquipeModal"
+  class="modal fade"
+  data-keyboard="false"
+  data-backdrop="false"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">
+          Equipes <i class="far fa-grin-stars"></i>
+          <p>
+            Vamos adicionar ou editar uma nova equipe? Preencha as informações
+            abaixo
+          </p>
+        </h5>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="EquipGroup" method="post" class="text-center">
+          <div class="form-group">
+            <label>Nome:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nome"
+              [value]="this.equipe?.nome ? this.equipe?.nome : ''"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Gestor:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nomeGestor"
+              [value]="this.equipe?.nomeGestor ? this.equipe?.nomeGestor : ''"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="close()"
+        >
+          Fechar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="Save()">
+          Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
