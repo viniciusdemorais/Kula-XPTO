@@ -18,7 +18,7 @@ Projeto realizado com Angular 8, ASP.NET, Mysql, Entity Framework, Bootstrap.
 ```
 cd API
 ```
-Rode o API.sln pelo pelo ISS Express no Visual Studio
+Rode o API.sln pelo pelo IIS Express no Visual Studio
 
 ## Como rodar o Front-end
 
