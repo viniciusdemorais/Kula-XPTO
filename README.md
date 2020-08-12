@@ -12,7 +12,7 @@ Projeto realizado com Angular 8, ASP.NET, Mysql, Entity Framework, Bootstrap.
 ## Como rodar a API
 ### No terminal, clone o projeto:
 ```
- git@github.com:AnaLuizaBarros/Pokedex.git
+ git@github.com:AnaLuizaBarros/Kula-XPTO.git
 ```
 ### Entre na pasta da API 
 ```
