@@ -54,7 +54,7 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(colaborador).State = EntityState.Modified;
+            _context.Update(colaborador);
 
             try
             {
@@ -72,7 +72,7 @@ namespace API.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(colaborador);
         }
 
         // POST: api/Colaborador
