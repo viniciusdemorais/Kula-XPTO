@@ -79,7 +79,6 @@ namespace API.Controllers
         public async Task<IActionResult> PostEquipe(Equipe equipe)
         {
             _context.Equipe.Add(equipe);
-            await _context.SaveChangesAsync();
             var result = await _context.SaveChangesAsync();
             if (result > 0)
             {
