@@ -2,7 +2,6 @@
 using API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 namespace API.Controllers
@@ -21,23 +20,27 @@ namespace API.Controllers
 
         // GET: api/Colaborador
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Colaborador>>> Getcolaborador()
+        public async Task<IActionResult> Getcolaborador()
         {
-            return await _context.Colaborador.ToListAsync();
+            var result = await _context.Colaborador.ToListAsync();
+            return Ok(result);
         }
 
         // GET: api/Colaborador/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Colaborador>> GetColaborador(int id)
+        public async Task<IActionResult> GetColaborador(int id)
         {
             var colaborador = await _context.Colaborador.FindAsync(id);
 
-            if (colaborador == null)
+            var result = await _context.SaveChangesAsync();
+            if (result > 0)
             {
-                return NotFound();
+                return Ok(colaborador);
             }
-
-            return colaborador;
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // PUT: api/Colaborador/5
@@ -76,17 +79,23 @@ namespace API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Colaborador>> PostColaborador(Colaborador colaborador)
+        public async Task<IActionResult> PostColaborador(Colaborador colaborador)
         {
             _context.Colaborador.Add(colaborador);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetColaborador", new { id = colaborador.IdColaborador }, colaborador);
+            var result = await _context.SaveChangesAsync();
+            if (result > 0)
+            {
+                return Ok(colaborador);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // DELETE: api/Colaborador/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Colaborador>> DeleteColaborador(int id)
+        public async Task<IActionResult> DeleteColaborador(int id)
         {
             var colaborador = await _context.Colaborador.FindAsync(id);
             if (colaborador == null)
@@ -95,9 +104,15 @@ namespace API.Controllers
             }
 
             _context.Colaborador.Remove(colaborador);
-            await _context.SaveChangesAsync();
-
-            return colaborador;
+            var result = await _context.SaveChangesAsync();
+            if (result > 0)
+            {
+                return Ok(colaborador);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         private bool ColaboradorExists(int id)

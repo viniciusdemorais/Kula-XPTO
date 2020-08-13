@@ -2,7 +2,6 @@
 using API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 namespace API.Controllers
@@ -22,28 +21,23 @@ namespace API.Controllers
 
         // GET: api/Equipes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Equipe>>> GetEquipe()
+        public async Task<IActionResult> GetEquipe()
         {
-            return await _context.Equipe.ToListAsync();
+            var result = await _context.Equipe.ToListAsync();
+            return Ok(result);
         }
 
         // GET: api/Equipes/5
         [HttpGet("{id}")]
         [Produces("application/json")]
-        public async Task<ActionResult<Equipe>> GetEquipe(int id)
+        public async Task<IActionResult> GetEquipe(int id)
         {
-            var equipe = await _context.Equipe.FindAsync(id);
-            
+            var equipe = await _context.Equipe.FindAsync(id);            
             if (equipe == null)
             {
                 return NotFound();
             }
-            
-            
-            return equipe;  
-            
-
-
+            return Ok(equipe); 
         }
 
         // PUT: api/Equipes/5
@@ -82,28 +76,40 @@ namespace API.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Equipe>> PostEquipe(Equipe equipe)
+        public async Task<IActionResult> PostEquipe(Equipe equipe)
         {
             _context.Equipe.Add(equipe);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetEquipe", new { id = equipe.IdEquipe }, equipe);
+            var result = await _context.SaveChangesAsync();
+            if (result > 0)
+            {
+                return Ok(equipe);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // DELETE: api/Equipes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Equipe>> DeleteEquipe(int id)
+        public async Task<IActionResult> DeleteEquipe(int id)
         {
             var equipe = await _context.Equipe.FindAsync(id);
             if (equipe == null)
             {
                 return NotFound();
             }
-
             _context.Equipe.Remove(equipe);
-            await _context.SaveChangesAsync();
-
-            return equipe;
+            var result = await _context.SaveChangesAsync();
+            if (result > 0)
+            {
+                return Ok(equipe);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         private bool EquipeExists(int id)
