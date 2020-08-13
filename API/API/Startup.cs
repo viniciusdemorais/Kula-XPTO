@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace API
 {
@@ -52,6 +54,11 @@ namespace API
                 o.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Kula WebApi", Version = "v1" });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,6 +84,14 @@ namespace API
 
             InicializaDB.InitializeEquipe(e);
             InicializaDB.InitializeColaborador(c);
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Kula WebApi");
+                c.RoutePrefix = string.Empty;
+                c.DocExpansion(DocExpansion.None);
+            });
         }
     }
 }

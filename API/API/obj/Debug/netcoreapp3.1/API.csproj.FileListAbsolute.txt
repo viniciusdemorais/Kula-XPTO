@@ -262,8 +262,6 @@ C:\Users\ASTRA\Desktop\Astro Boy 2020\Kula Jobs\OLHA AQUI COISA\API\API\obj\Debu
 D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\obj\Debug\netcoreapp3.1\API.csprojAssemblyReference.cache
 D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\obj\Debug\netcoreapp3.1\API.AssemblyInfoInputs.cache
 D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\obj\Debug\netcoreapp3.1\API.AssemblyInfo.cs
-D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\obj\Debug\netcoreapp3.1\API.csproj.CoreCompileInputs.cache
-D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\obj\Debug\netcoreapp3.1\API.MvcApplicationPartsAssemblyInfo.cache
 D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\bin\Debug\netcoreapp3.1\appsettings.json
 D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -320,3 +318,10 @@ D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\bin\Debug\netcoreapp3
 D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\obj\Debug\netcoreapp3.1\API.dll
 D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\obj\Debug\netcoreapp3.1\API.pdb
+D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\obj\Debug\netcoreapp3.1\API.csproj.CoreCompileInputs.cache
+D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\obj\Debug\netcoreapp3.1\API.MvcApplicationPartsAssemblyInfo.cs
+D:\Sources\Meu Git\Teste Estagiario Kula\Kula-XPTO\API\API\obj\Debug\netcoreapp3.1\API.MvcApplicationPartsAssemblyInfo.cache
