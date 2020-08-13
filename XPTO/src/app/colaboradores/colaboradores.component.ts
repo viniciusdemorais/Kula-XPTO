@@ -1,4 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  EventEmitter,
+  Output,
+  ElementRef,
+  ViewChild,
+} from "@angular/core";
 
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
@@ -11,6 +19,11 @@ import { Colaboradores } from "./colaboradores.model";
   templateUrl: "./colaboradores.component.html",
 })
 export class ColaboradoresComponent implements OnInit {
+  @ViewChild("closeModal", { static: false }) closeModal: ElementRef;
+  @Input() equipe?: number;
+  @Output() colaborador: EventEmitter<Colaboradores> = new EventEmitter<
+    Colaboradores
+  >();
   idColaborador: number;
   idEquipe: number;
   Colaboradores: Colaboradores[];
@@ -63,15 +76,15 @@ export class ColaboradoresComponent implements OnInit {
     });
   }
   Save() {
-    this.colaborateGroup.controls["equipe"].patchValue(this.idEquipe);
+    this.colaborateGroup.controls["equipe"].patchValue(this.equipe);
     if (this.idColaborador == null) {
       if (this.colaborateGroup.valid) {
         this.colaborateGroup.removeControl("idColaborador");
         this.service.PostColaboradores(this.colaborateGroup.value).subscribe(
           (suc) => {
             alert("Colaborador(a) cadastrado com sucesso!!");
-
-            this.close();
+            this.colaborador.emit(suc);
+            this.closeModal.nativeElement.click();
           },
           (err) => {
             alert("Erro ao cadastrar colaborador(a)!!");
@@ -88,7 +101,8 @@ export class ColaboradoresComponent implements OnInit {
           .subscribe(
             (suc) => {
               alert("Colaborador(a) editado com sucesso!!");
-              this.close();
+              this.colaborador.emit(suc);
+              this.closeModal.nativeElement.click();
             },
             (err) => {
               alert("Erro ao Editar o colaborador(a)!!");

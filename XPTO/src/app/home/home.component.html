@@ -77,10 +77,11 @@
 
         <div class="text-center list-group-item">
           <button
+            (click)="setEquipe(Equip.idEquipe)"
             class="btn"
             data-toggle="modal"
             data-target="#ColaboradoresModal"
-            [routerLink]="['/colaboradores', Equip.idEquipe]"
+            [routerLink]="['/colaboradores', 0, Equip.idEquipe]"
           >
             <i class="fas fa-user-plus"></i>
           </button>
@@ -117,3 +118,9 @@
     </div>
   </div>
 </div>
+
+<xp-equipes></xp-equipes>
+<xp-colaboradores
+  [equipe]="idEquipe"
+  (colaborador)="addColaborador($event)"
+></xp-colaboradores>

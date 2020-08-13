@@ -24,7 +24,10 @@ export class Colaborate {
       `${this.colaboradoresURL}/${id}`
     );
   }
-  UpdateColaboradores(id: number, body) {
-    return this.httpClient.put(`${this.colaboradoresURL}/${id}`, body);
+  UpdateColaboradores(id: number, body): Observable<Colaboradores> {
+    return this.httpClient.put<Colaboradores>(
+      `${this.colaboradoresURL}/${id}`,
+      body
+    );
   }
 }

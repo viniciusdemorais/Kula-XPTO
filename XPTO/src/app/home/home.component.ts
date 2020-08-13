@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
 
   id: number;
   type: string;
+  idEquipe: number;
 
   equipe: Equipes[];
   colaboradores: Colaboradores[];
@@ -98,5 +99,11 @@ export class HomeComponent implements OnInit {
         }
       );
     }
+  }
+  setEquipe(id: number) {
+    this.idEquipe = id;
+  }
+  addColaborador(colaborador: Colaboradores) {
+    this.colaboradores.push(colaborador);
   }
 }
