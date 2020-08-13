@@ -13,7 +13,7 @@ import { Colaboradores } from "./colaboradores.model";
 export class ColaboradoresComponent implements OnInit {
   idColaborador: number;
   idEquipe: number;
-  Colaboradores: Colaboradores;
+  Colaboradores: Colaboradores[];
   colaborateGroup: FormGroup;
   constructor(
     private service: Colaborate,
@@ -44,7 +44,7 @@ export class ColaboradoresComponent implements OnInit {
     if (this.idColaborador && this.idEquipe) {
       this.service
         .ColaboradoresById(this.idColaborador)
-        .subscribe((colab) => (this.Colaboradores = colab));
+        .subscribe((colab) => (this.Colaboradores = [colab]));
     } else {
       this.idEquipe = this.idColaborador;
       this.idColaborador = null;
@@ -55,7 +55,7 @@ export class ColaboradoresComponent implements OnInit {
       window.location.reload();
     });
   }
-  setValues(data: Colaborate) {
+  setValues(data: Colaboradores[]) {
     Object.keys(this.colaborateGroup.controls).forEach((key) => {
       if (this.colaborateGroup.controls[key].value == "") {
         this.colaborateGroup.controls[key].patchValue(data[key]);
@@ -84,10 +84,7 @@ export class ColaboradoresComponent implements OnInit {
       this.setValues(this.Colaboradores);
       if (this.colaborateGroup.valid) {
         this.service
-          .UpdateColaboradores(
-            this.Colaboradores.idColaborador,
-            this.colaborateGroup.value
-          )
+          .UpdateColaboradores(this.idColaborador, this.colaborateGroup.value)
           .subscribe(
             (suc) => {
               alert("Colaborador(a) editado com sucesso!!");

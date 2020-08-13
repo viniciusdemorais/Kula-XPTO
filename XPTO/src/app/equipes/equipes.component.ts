@@ -7,10 +7,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "xp-equipes",
-  templateUrl: "./equipes.component.html"
+  templateUrl: "./equipes.component.html",
 })
 export class EquipesComponent implements OnInit {
-  equipe: Equipes;
+  equipe: Equipes[];
   id: number;
   EquipGroup: FormGroup;
   data = "";
@@ -37,7 +37,7 @@ export class EquipesComponent implements OnInit {
     if (this.id) {
       this.service
         .TeamsById(this.id)
-        .subscribe((equipe) => (this.equipe = equipe));
+        .subscribe((equipe) => (this.equipe = [equipe]));
       this.EquipGroup.controls["idEquipe"].patchValue(this.id);
     }
   }
@@ -48,7 +48,7 @@ export class EquipesComponent implements OnInit {
     });
   }
 
-  setValues(data: Equipes) {
+  setValues(data: Equipes[]) {
     Object.keys(this.EquipGroup.controls).forEach((key) => {
       if (this.EquipGroup.controls[key].value == "") {
         this.EquipGroup.controls[key].patchValue(data[key]);
@@ -76,17 +76,15 @@ export class EquipesComponent implements OnInit {
     } else {
       this.setValues(this.equipe);
       if (this.EquipGroup.valid) {
-        this.service
-          .UpdateTeam(this.equipe.idEquipe, this.EquipGroup.value)
-          .subscribe(
-            (suc) => {
-              alert("Equipe editada com sucesso!!");
-              this.close();
-            },
-            (err) => {
-              alert("Erro ao Editar a Equipe!!");
-            }
-          );
+        this.service.UpdateTeam(this.id, this.EquipGroup.value).subscribe(
+          (suc) => {
+            alert("Equipe editada com sucesso!!");
+            this.close();
+          },
+          (err) => {
+            alert("Erro ao Editar a Equipe!!");
+          }
+        );
       } else {
         alert("Preencha todos os campos corretamente!!");
       }
