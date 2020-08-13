@@ -1,17 +1,13 @@
-﻿using System;
+﻿using API.Data;
+using API.Model;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using API.Data;
-using API.Model;
-using System.Text.Json.Serialization;
-using System.Text.Json;
 namespace API.Controllers
 {
-    
+
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]
@@ -28,7 +24,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Equipe>>> GetEquipe()
         {
-            return await _context.equipe.ToListAsync();
+            return await _context.Equipe.ToListAsync();
         }
 
         // GET: api/Equipes/5
@@ -36,7 +32,7 @@ namespace API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<Equipe>> GetEquipe(int id)
         {
-            var equipe = await _context.equipe.FindAsync(id);
+            var equipe = await _context.Equipe.FindAsync(id);
             
             if (equipe == null)
             {
@@ -88,7 +84,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Equipe>> PostEquipe(Equipe equipe)
         {
-            _context.equipe.Add(equipe);
+            _context.Equipe.Add(equipe);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEquipe", new { id = equipe.IdEquipe }, equipe);
@@ -98,13 +94,13 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Equipe>> DeleteEquipe(int id)
         {
-            var equipe = await _context.equipe.FindAsync(id);
+            var equipe = await _context.Equipe.FindAsync(id);
             if (equipe == null)
             {
                 return NotFound();
             }
 
-            _context.equipe.Remove(equipe);
+            _context.Equipe.Remove(equipe);
             await _context.SaveChangesAsync();
 
             return equipe;
@@ -112,7 +108,7 @@ namespace API.Controllers
 
         private bool EquipeExists(int id)
         {
-            return _context.equipe.Any(e => e.IdEquipe == id);
+            return _context.Equipe.Any(e => e.IdEquipe == id);
         }
     }
 }

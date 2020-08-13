@@ -1,17 +1,13 @@
-﻿using System;
+﻿using API.Data;
+using API.Model;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using API.Data;
-using API.Model;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 namespace API.Controllers
 {
-  
+
     [Route("api/[controller]")]
     [ApiController]
     public class ColaboradorController : ControllerBase
@@ -27,14 +23,14 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Colaborador>>> Getcolaborador()
         {
-            return await _context.colaborador.ToListAsync();
+            return await _context.Colaborador.ToListAsync();
         }
 
         // GET: api/Colaborador/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Colaborador>> GetColaborador(int id)
         {
-            var colaborador = await _context.colaborador.FindAsync(id);
+            var colaborador = await _context.Colaborador.FindAsync(id);
 
             if (colaborador == null)
             {
@@ -82,7 +78,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Colaborador>> PostColaborador(Colaborador colaborador)
         {
-            _context.colaborador.Add(colaborador);
+            _context.Colaborador.Add(colaborador);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetColaborador", new { id = colaborador.IdColaborador }, colaborador);
@@ -92,13 +88,13 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Colaborador>> DeleteColaborador(int id)
         {
-            var colaborador = await _context.colaborador.FindAsync(id);
+            var colaborador = await _context.Colaborador.FindAsync(id);
             if (colaborador == null)
             {
                 return NotFound();
             }
 
-            _context.colaborador.Remove(colaborador);
+            _context.Colaborador.Remove(colaborador);
             await _context.SaveChangesAsync();
 
             return colaborador;
@@ -106,7 +102,7 @@ namespace API.Controllers
 
         private bool ColaboradorExists(int id)
         {
-            return _context.colaborador.Any(e => e.IdColaborador == id);
+            return _context.Colaborador.Any(e => e.IdColaborador == id);
         }
     }
 }

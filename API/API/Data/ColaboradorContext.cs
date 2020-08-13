@@ -1,15 +1,22 @@
 ﻿using API.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace API.Data
 {
     public class ColaboradorContext : DbContext
     {
-        public ColaboradorContext(DbContextOptions<ColaboradorContext> options) : base(options) { }
-        public DbSet<Colaborador> colaborador { get; set; }
+        private readonly IConfiguration configuration;
+        public ColaboradorContext(IConfiguration configuration) => this.configuration = configuration;
+
+        public DbSet<Colaborador> Colaborador { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
+        {
+            if (!dbContextOptionsBuilder.IsConfigured)
+            {
+                dbContextOptionsBuilder.UseMySQL(configuration["ConnectionStrings:ConexaoMysqlServer"]);
+            }
+        }
     }
 }

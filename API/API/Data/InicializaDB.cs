@@ -1,19 +1,15 @@
-﻿using API.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace API.Data
 {
     public static class InicializaDB
     {
-        public static void initializeEquipe(EquipeContext context) {
+        public static void InitializeEquipe(EquipeContext context) {
 
             context.Database.EnsureCreated();
 
             //Procura equipes
-            if (context.equipe.Any())
+            if (context.Equipe.Any())
             {
                 return;
 
@@ -27,13 +23,13 @@ namespace API.Data
 
             context.SaveChanges();
         }
-        public static void initializeColaborador(ColaboradorContext context)
+        public static void InitializeColaborador(ColaboradorContext context)
         {
 
             context.Database.EnsureCreated();
 
             //Procura equipes
-            if (context.colaborador.Any())
+            if (context.Colaborador.Any())
             {
                 return;
 
